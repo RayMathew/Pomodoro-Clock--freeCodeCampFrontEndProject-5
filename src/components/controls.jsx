@@ -19,10 +19,13 @@ class Controls extends React.Component {
             // to click it to continue the timer
             <div style={styles.container}>
                 <i className="fa fa-play"
+                    id="start_stop"
                     onClick={() => this.props.playPause('play')}></i>
                 <i className="fa fa-pause"
+                    id="start_stop"
                     onClick={() => this.props.playPause('pause')}></i>
                 <i className="fa fa-refresh"
+                    id="reset"
                     onClick={() => this.props.reset()}></i>
             </div>
         );

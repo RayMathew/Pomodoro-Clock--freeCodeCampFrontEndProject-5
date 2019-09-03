@@ -58,6 +58,8 @@ class Clock extends React.Component {
         document.getElementsByClassName("fa-play")[0].style.display = 'block';
         document.getElementsByClassName("fa-play")[0].className = 'fa fa-play';
         document.getElementsByClassName("fa-pause")[0].style.display = 'none';
+        document.getElementById("beep").pause();
+        document.getElementById("beep").currentTime = 0;
         let interval = this.state.interval;
         this.setState({
             display: '25:00',
@@ -72,24 +74,35 @@ class Clock extends React.Component {
         })
     };
 
+    changeEvent = () => {
+        document.getElementById("beep").play();
+        if (this.state.currentEvent === 'Session'){
+            return 'Break';
+        }
+        else return 'Session';
+    };
+
     updateDisplay = () => {
-        let currentEvent = this.state.currentEvent.toLowerCase();
+        let currentEvent = this.state.currentEvent;
         let display = '';
         let currentMinutes = 0;
         let currentSeconds = 0;
         if (this.state.paused || this.state.reset){//update when user clicks on the arrow
             console.log("here");
-            currentMinutes = this.state[currentEvent+'time'];
+            currentMinutes = this.state[currentEvent.toLowerCase()+'time'];
             display += currentMinutes + ':00';
             if (currentMinutes < 10){
                 display = '0' + display;
             }
         }
         else {//update when a second is over
-            console.log("or here");
             currentMinutes = this.state.currentMinutes;
             currentSeconds = this.state.currentSeconds - 1;
             if (currentSeconds === -1){
+                if (currentMinutes === 0){
+                    currentEvent = this.changeEvent();
+                    currentMinutes = this.state[currentEvent.toLowerCase()+'time'];
+                }
                 currentSeconds = 59;
                 currentMinutes--;
             }
@@ -104,11 +117,11 @@ class Clock extends React.Component {
                 display += currentSeconds;
             }
         }
-        console.log("then here", display);
         this.setState({
             display: display,
             currentMinutes: currentMinutes,
-            currentSeconds: currentSeconds
+            currentSeconds: currentSeconds,
+            currentEvent: currentEvent
         });
     };
 
@@ -156,7 +169,8 @@ class Clock extends React.Component {
             <Controls playPause={this.playPause}
                       reset={this.reset}
                       currentEvent={this.state.currentEvent}/>
-            <audio id="beep"/>
+                  <audio id="beep" src="http://www.peter-weinberg.com/files/1014/8073/6015/BeepSound.wav"
+                          preload="auto"/>
         </div>);
     }
 }
