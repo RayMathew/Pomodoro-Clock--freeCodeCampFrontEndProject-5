@@ -65,7 +65,7 @@ class Clock extends React.Component {
         document.getElementById("beep").pause();
         document.getElementById("beep").currentTime = 0;
         // let interval = this.state.interval;
-        this.state.inerval && this.state.interval.cancel();
+        this.state.interval && this.state.interval.cancel();
         this.setState({
             display: '25:00',
             breaktime: 5,
