@@ -93,7 +93,6 @@ class Clock extends React.Component {
         let currentMinutes = 0;
         let currentSeconds = 0;
         if (this.state.paused || this.state.reset){//update when user clicks on the arrow
-            console.log("here");
             currentMinutes = this.state[currentEvent.toLowerCase()+'time'];
             display += currentMinutes + ':00';
             if (currentMinutes < 10){
@@ -107,9 +106,12 @@ class Clock extends React.Component {
                 if (currentMinutes === 0){
                     currentEvent = this.changeEvent();
                     currentMinutes = this.state[currentEvent.toLowerCase()+'time'];
+                    currentSeconds = 0;
                 }
-                currentSeconds = 59;
-                currentMinutes--;
+                else {
+                    currentSeconds = 59;
+                    currentMinutes--;
+                }
             }
             display += currentMinutes + ':';
             if (currentMinutes < 10){
