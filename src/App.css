@@ -2,10 +2,6 @@
   animation: blinker 1s linear infinite;
 }
 
-/* .fa-pause {
-    visibility: hidden;
-} */
-
 @keyframes blinker {
   50% {
     opacity: 0;

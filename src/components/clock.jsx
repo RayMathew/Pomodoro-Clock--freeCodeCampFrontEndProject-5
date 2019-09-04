@@ -31,8 +31,6 @@ class Clock extends React.Component {
 
     playPause = (action) => {
         if ((this.state.reset && !this.state.paused) || (this.state.paused && this.state.reset)){
-            // document.getElementsByClassName("fa-play")[0].style.visibility = 'hidden';
-            // document.getElementsByClassName("fa-pause")[0].style.visibility = 'visible';
             document.getElementById("start_stop").className = "fa fa-pause";
             this.setState({
                 interval: window.accurateInterval(() => {
@@ -43,11 +41,7 @@ class Clock extends React.Component {
             });
         }
         else {
-            // document.getElementsByClassName("fa-play")[0].style.visibility = 'visible';
-            // document.getElementsByClassName("fa-play")[0].className = 'fa fa-play blink';
-            // document.getElementsByClassName("fa-pause")[0].style.visibility = 'hidden';
             document.getElementById("start_stop").className = "fa fa-play blink";
-            // let interval = this.state.interval;
             this.state.interval.cancel();
             this.setState({
                 interval: null,
@@ -58,13 +52,9 @@ class Clock extends React.Component {
     };
 
     reset = () => {
-        // document.getElementsByClassName("fa-play")[0].style.visibility = 'visible';
-        // document.getElementsByClassName("fa-play")[0].className = 'fa fa-play';
-        // document.getElementsByClassName("fa-pause")[0].style.visibility = 'hidden';
         document.getElementById("start_stop").className = "fa fa-play";
         document.getElementById("beep").pause();
         document.getElementById("beep").currentTime = 0;
-        // let interval = this.state.interval;
         this.state.interval && this.state.interval.cancel();
         this.setState({
             display: '25:00',

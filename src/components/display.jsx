@@ -1,7 +1,5 @@
 import React from 'react';
 
-//stopped, paused, break, session, reset
-
 const displayStyles = {
     container: {
         width: '350px',
