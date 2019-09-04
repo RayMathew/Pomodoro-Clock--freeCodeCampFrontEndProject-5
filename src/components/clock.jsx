@@ -9,8 +9,14 @@ const clockStyles = {
         justifyContent: 'space-around',
         width: '70vw',
         maxWidth: '700px',
-        margin: 'auto'
+        margin: 'auto',
+        padding: '13px'
     },
+    header: {
+        textAlign: 'center',
+        fontSize: '24px',
+        padding: '15px',
+    }
 };
 
 class Clock extends React.Component {
@@ -142,7 +148,7 @@ class Clock extends React.Component {
 
     render() {
         return (<div>
-            <div>
+            <div style={clockStyles.header}>
                 Pomodoro Clock
             </div>
             <div style={clockStyles.timersContainers}>

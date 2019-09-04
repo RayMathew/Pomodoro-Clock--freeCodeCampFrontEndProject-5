@@ -10,6 +10,9 @@ let timerControlStyles = {
         justifyContent: 'space-between',
         alignItems: 'center'
     },
+    label: {
+        padding: '5px'
+    },
     timerValue: {
         border: '1px solid black',
         borderRadius: '50%',
@@ -46,7 +49,8 @@ class TimerControl extends React.Component {
     render () {
         return (
             <div style={{...timerControlStyles.parent, width: this.state.containerWidth}}>
-                <div id={this.props.text.toLowerCase() + '-label'}>
+                <div id={this.props.text.toLowerCase() + '-label'}
+                    style={timerControlStyles.label}>
                     {this.props.text}
                 </div>
                 <div style={{...timerControlStyles.container, width: this.state.containerWidth}}>
