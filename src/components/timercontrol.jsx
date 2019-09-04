@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-let styles = {
+let timerControlStyles = {
     parent: {
         textAlign: 'center'
     },
@@ -45,17 +45,17 @@ class TimerControl extends React.Component {
     }
     render () {
         return (
-            <div style={{...styles.parent, width: this.state.containerWidth}}>
+            <div style={{...timerControlStyles.parent, width: this.state.containerWidth}}>
                 <div id={this.props.text.toLowerCase() + '-label'}>
                     {this.props.text}
                 </div>
-                <div style={{...styles.container, width: this.state.containerWidth}}>
+                <div style={{...timerControlStyles.container, width: this.state.containerWidth}}>
                     <button onClick={this.props.onDecrement}
                             id={this.props.text.toLowerCase() + "-decrement"}>
                         <i className="fa fa-minus"></i>
                     </button>
                     <div id={this.props.text.toLowerCase() + '-length'}
-                            style={styles.timerValue}>
+                            style={timerControlStyles.timerValue}>
                         {this.props.display}
                     </div>
                     <button onClick={this.props.onIncrement}

@@ -2,9 +2,9 @@
   animation: blinker 1s linear infinite;
 }
 
-.fa-pause {
-    display: none;
-}
+/* .fa-pause {
+    visibility: hidden;
+} */
 
 @keyframes blinker {
   50% {

@@ -3,7 +3,7 @@ import TimerControl from './timercontrol';
 import Display from './display';
 import Controls from './controls';
 
-const styles = {
+const clockStyles = {
     timersContainers: {
         display: 'flex',
         justifyContent: 'space-around',
@@ -30,11 +30,12 @@ class Clock extends React.Component {
     }
 
     playPause = (action) => {
-        if (action === 'play'){
-            document.getElementsByClassName("fa-play")[0].style.display = 'none';
-            document.getElementsByClassName("fa-pause")[0].style.display = 'block';
+        if ((this.state.reset && !this.state.paused) || (this.state.paused && this.state.reset)){
+            // document.getElementsByClassName("fa-play")[0].style.visibility = 'hidden';
+            // document.getElementsByClassName("fa-pause")[0].style.visibility = 'visible';
+            document.getElementById("start_stop").className = "fa fa-pause";
             this.setState({
-                interval: setInterval(() => {
+                interval: window.accurateInterval(() => {
                     this.updateDisplay();
                 }, 1000),
                 paused: false,
@@ -42,12 +43,14 @@ class Clock extends React.Component {
             });
         }
         else {
-            document.getElementsByClassName("fa-play")[0].style.display = 'block';
-            document.getElementsByClassName("fa-play")[0].className = 'fa fa-play blink';
-            document.getElementsByClassName("fa-pause")[0].style.display = 'none';
-            let interval = this.state.interval;
+            // document.getElementsByClassName("fa-play")[0].style.visibility = 'visible';
+            // document.getElementsByClassName("fa-play")[0].className = 'fa fa-play blink';
+            // document.getElementsByClassName("fa-pause")[0].style.visibility = 'hidden';
+            document.getElementById("start_stop").className = "fa fa-play blink";
+            // let interval = this.state.interval;
+            this.state.interval.cancel();
             this.setState({
-                interval: clearInterval(interval),
+                interval: null,
                 paused: true,
                 reset: true
             })
@@ -55,12 +58,14 @@ class Clock extends React.Component {
     };
 
     reset = () => {
-        document.getElementsByClassName("fa-play")[0].style.display = 'block';
-        document.getElementsByClassName("fa-play")[0].className = 'fa fa-play';
-        document.getElementsByClassName("fa-pause")[0].style.display = 'none';
+        // document.getElementsByClassName("fa-play")[0].style.visibility = 'visible';
+        // document.getElementsByClassName("fa-play")[0].className = 'fa fa-play';
+        // document.getElementsByClassName("fa-pause")[0].style.visibility = 'hidden';
+        document.getElementById("start_stop").className = "fa fa-play";
         document.getElementById("beep").pause();
         document.getElementById("beep").currentTime = 0;
-        let interval = this.state.interval;
+        // let interval = this.state.interval;
+        this.state.inerval && this.state.interval.cancel();
         this.setState({
             display: '25:00',
             breaktime: 5,
@@ -70,7 +75,7 @@ class Clock extends React.Component {
             reset: true,
             currentMinutes:25,
             currentSeconds:0,
-            interval: clearInterval(interval)
+            interval: null
         })
     };
 
@@ -148,7 +153,7 @@ class Clock extends React.Component {
             <div>
                 Pomodoro Clock
             </div>
-            <div style={styles.timersContainers}>
+            <div style={clockStyles.timersContainers}>
                 <div>
                     <TimerControl text="Break"
                                   display={this.state.breaktime}

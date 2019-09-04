@@ -2,7 +2,7 @@ import React from 'react';
 
 //stopped, paused, break, session, reset
 
-const styles = {
+const displayStyles = {
     container: {
         width: '350px',
         height: '350px',
@@ -29,13 +29,13 @@ class Display extends React.Component {
     }
     render () {
         return (
-            <div style={styles.container}>
+            <div style={displayStyles.container}>
                 <div id="timer-label"
-                        style={styles.label}>
+                        style={displayStyles.label}>
                     {this.props.currentEvent}
                 </div>
                 <div id="time-left"
-                        style={styles.text}>
+                        style={displayStyles.text}>
                     {this.props.text}
                 </div>
             </div>
